@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements ScrollWebView.OnS
 
 
         }
-
+//
         @JavascriptInterface
         public void goWebpage(String url, String type, String ss) {
             Log.d("PPQWEQ", type + "  " + url + "  " + ss);
