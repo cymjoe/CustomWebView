@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.net.http.SslError;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.SslErrorHandler;
@@ -17,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-
 public class CustomWebView {
     Activity mActivity;
     ScrollWebView webView;
@@ -28,13 +28,15 @@ public class CustomWebView {
 
     String title;
 
-    public CustomWebView( Activity activity) {
+    public CustomWebView(Activity activity) {
         mActivity = activity;
         webView = new ScrollWebView(mActivity);
         webView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
         progressView = new ProgressView(mActivity);
         progressView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 10));
         progressView.setColor(mActivity.getResources().getColor(R.color.colorAccent));
+        progressView.setProgress(0);
+
     }
 
     public CustomWebView setProgressColor(int color) {
@@ -64,7 +66,7 @@ public class CustomWebView {
         return this;
     }
 
-    public static CustomWebView with( Activity activity) {
+    public static CustomWebView with(Activity activity) {
         if (activity == null) {
             throw new NullPointerException("activity can not be null .");
         }
@@ -74,7 +76,7 @@ public class CustomWebView {
     ProgressView progressView;
     ViewGroup v;
 
-    public CustomWebView setWebParent( ViewGroup v) {
+    public CustomWebView setWebParent(ViewGroup v) {
         this.v = v;
         this.v.removeAllViews();
         FrameLayout layout = new FrameLayout(mActivity);
@@ -95,6 +97,23 @@ public class CustomWebView {
         return this;
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
+    public void onResume() {
+        if (webView != null) {
+            webView.getSettings().setJavaScriptEnabled(true);
+
+        }
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    public void onStop() {
+        if (webView != null) {
+            webView.getSettings().setJavaScriptEnabled(false);
+
+        }
+    }
+
+
     public CustomWebView init() {
         WebSettings webSettings = webView.getSettings();
         //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
@@ -113,7 +132,7 @@ public class CustomWebView {
         webSettings.setTextZoom(100);//设置webview缩放比例
 
         //其他细节操作
-        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT); //关闭webview中缓存
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); //关闭webview中缓存
         webSettings.setDomStorageEnabled(true);//开启DOM
         webSettings.setAllowFileAccess(true); //设置可以访问文件
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
@@ -199,6 +218,7 @@ public class CustomWebView {
     }
 
     public CustomWebView loadUrl(String url) {
+        Log.d("PPWQEQW", url);
         webView.loadUrl(url);
         return this;
     }
