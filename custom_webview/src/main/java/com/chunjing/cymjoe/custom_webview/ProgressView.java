@@ -8,7 +8,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import androidx.annotation.Nullable;
+
 
 public class ProgressView extends View {
     private Paint mPaint;
@@ -20,11 +20,11 @@ public class ProgressView extends View {
         init();
     }
 
-    public ProgressView(Context context, @Nullable AttributeSet attrs) {
+    public ProgressView(Context context,  AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ProgressView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ProgressView(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

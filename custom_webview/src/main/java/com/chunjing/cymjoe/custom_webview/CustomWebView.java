@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+
 
 public class CustomWebView {
     Activity mActivity;
@@ -28,7 +28,7 @@ public class CustomWebView {
 
     String title;
 
-    public CustomWebView(@NonNull Activity activity) {
+    public CustomWebView( Activity activity) {
         mActivity = activity;
         webView = new ScrollWebView(mActivity);
         webView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
@@ -64,7 +64,7 @@ public class CustomWebView {
         return this;
     }
 
-    public static CustomWebView with(@NonNull Activity activity) {
+    public static CustomWebView with( Activity activity) {
         if (activity == null) {
             throw new NullPointerException("activity can not be null .");
         }
@@ -74,7 +74,7 @@ public class CustomWebView {
     ProgressView progressView;
     ViewGroup v;
 
-    public CustomWebView setWebParent(@NonNull ViewGroup v) {
+    public CustomWebView setWebParent( ViewGroup v) {
         this.v = v;
         this.v.removeAllViews();
         FrameLayout layout = new FrameLayout(mActivity);
@@ -82,6 +82,7 @@ public class CustomWebView {
         layout.addView(webView);
         layout.addView(progressView);
         this.v.addView(layout);
+        init();
         return this;
     }
 
